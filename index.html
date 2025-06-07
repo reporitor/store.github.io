@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusTrade - Marketplace Akun Game Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E63946', // Merah
+                        secondary: '#1D3557', // Biru tua
+                        dark: '#0A0A0A', // Hitam
+                        light: '#F8F9FA', // Putih
+                        accent: '#457B9D' // Biru medium
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Animasi Premium */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Efek Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Hover Efek */
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px) rotateX(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Underline Animation */
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #E63946;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="font-sans bg-light text-dark antialiased">
+    <!-- Navbar Premium -->
+    <nav class="bg-dark text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="float-animation">
+                        <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-game-controller-virtual-reality-vitaliy-gorbachev-lineal-color-vitaly-gorbachev-1.png" 
+                             alt="NexusTrade Logo" class="h-8">
+                    </div>
+                    <h1 class="text-xl font-bold">
+                        <span class="text-primary">Nexus</span><span class="text-white">Trade</span>
+                    </h1>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-white font-medium">Beranda</a>
+                    <div class="relative group">
+                        <a href="#" class="nav-link active text-primary font-medium flex items-center">
+                            Top Up Game
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            <a href="#" class="block px-4 py-2 text-dark hover:bg-gray-100">Mobile Legends</a>
+                            <a href="#" class="block px-4 py-2 text-dark hover:bg-gray-100">Free Fire</a>
+                            <a href="#" class="block px-4 py-2 text-dark hover:bg-gray-100">PUBG Mobile</a>
+                            <a href="#" class="block px-4 py-2 text-dark hover:bg-gray-100">Valorant</a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white font-medium">Beli Akun</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white font-medium">Jual Akun</a>
+                    <a href="#" class="nav-link text-gray-300 hover:text-white font-medium">Tentang Kami</a>
+                </div>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <button class="text-white hover:text-primary transition-colors hidden md:block">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <button class="text-white hover:text-primary transition-colors hidden md:block">
+                        <i class="fas fa-bell text-lg"></i>
+                        <span class="absolute -mt-2 -mr-2 bg-primary text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="bg-primary hover:bg-opacity-90 text-white px-4 py-2 rounded-full font-medium transition-all flex items-center">
+                        <i class="fas fa-user-circle mr-2"></i>
+                        <span class="hidden md:inline">Masuk/Daftar</span>
+                    </button>
+                    <button class="md:hidden text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-dark to-secondary text-white py-16 md:py-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0 bg-[url('https://img.icons8.com/ios/50/000000/controller--v1.png')] bg-repeat opacity-10"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 fade-in" style="animation-delay: 0.3s;">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                        Marketplace <span class="text-primary">Premium</span> <br>untuk Gamers
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">Top up game, beli akun premium, atau jual akunmu dengan aman dan cepat</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-full font-medium transition-all">
+                            Top Up Sekarang
+                        </button>
+                        <button class="bg-white hover:bg-gray-100 text-dark px-6 py-3 rounded-full font-medium transition-all">
+                            Jual Akun
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center fade-in" style="animation-delay: 0.6s;">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                         alt="Gaming Hero" class="rounded-xl shadow-2xl w-full max-w-md">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Features -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold mb-4">Layanan <span class="text-primary">Premium</span> Kami</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nikmati pengalaman bertransaksi game yang aman, cepat, dan terpercaya</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Top Up -->
+                <div class="bg-light rounded-xl p-8 shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="bg-primary bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mb-6 text-primary">
+                        <i class="fas fa-coins text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Top Up Game</h3>
+                    <p class="text-gray-600 mb-4">Isi diamond, UC, VP, dan mata uang game lainnya dengan proses instan</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Mobile Legends
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Free Fire
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            PUBG Mobile
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block mt-4 text-primary font-medium hover:underline">Lihat Semua →</a>
+                </div>
+                
+                <!-- Beli Akun -->
+                <div class="bg-light rounded-xl p-8 shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.6s;">
+                    <div class="bg-secondary bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mb-6 text-secondary">
+                        <i class="fas fa-shopping-bag text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Beli Akun Game</h3>
+                    <p class="text-gray-600 mb-4">Dapatkan akun premium dengan skin lengkap dan tier tinggi</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Akun Legendary
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Skin Lengkap
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Garansi Aman
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block mt-4 text-primary font-medium hover:underline">Jelajahi Akun →</a>
+                </div>
+                
+                <!-- Jual Akun -->
+                <div class="bg-light rounded-xl p-8 shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.9s;">
+                    <div class="bg-accent bg-opacity-10 rounded-full w-16 h-16 flex items-center justify-center mb-6 text-accent">
+                        <i class="fas fa-wallet text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Jual Akun Game</h3>
+                    <p class="text-gray-600 mb-4">Hasilkan uang dari akun game yang sudah tidak kamu mainkan</p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Proses Cepat
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Pembayaran Instan
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-primary mr-2"></i>
+                            Keamanan Terjamin
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block mt-4 text-primary font-medium hover:underline">Mulai Jual Sekarang →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Up Products -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold"><span class="text-primary">Top Up</span> Game</h2>
+                <a href="#" class="text-primary hover:underline font-medium">Lihat Semua</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="MLBB Top Up" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Populer
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Mobile Legends</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-dark ml-1">4.9</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Diamond MLBB proses instan</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>86 Diamond</span>
+                                <span class="font-bold text-primary">Rp 20.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>172 Diamond</span>
+                                <span class="font-bold text-primary">Rp 40.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>257 Diamond</span>
+                                <span class="font-bold text-primary">Rp 60.000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-primary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.6s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="Free Fire Top Up" class="w-full h-40 object-cover">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Free Fire</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-dark ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Diamond FF proses instan</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>100 Diamond</span>
+                                <span class="font-bold text-primary">Rp 15.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>310 Diamond</span>
+                                <span class="font-bold text-primary">Rp 45.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>520 Diamond</span>
+                                <span class="font-bold text-primary">Rp 75.000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-primary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.9s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1586810724476-c294fb7ac01b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="PUBG Top Up" class="w-full h-40 object-cover">
+                        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Baru
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">PUBG Mobile</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-dark ml-1">4.7</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">UC PUBG proses instan</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>60 UC</span>
+                                <span class="font-bold text-primary">Rp 12.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>325 UC</span>
+                                <span class="font-bold text-primary">Rp 65.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>660 UC</span>
+                                <span class="font-bold text-primary">Rp 130.000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-primary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Sekarang
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 1.2s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="Valorant Top Up" class="w-full h-40 object-cover">
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Valorant</h3>
+                            <div class="flex items-center text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <span class="text-dark ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">VP Valorant proses instan</p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>125 VP</span>
+                                <span class="font-bold text-primary">Rp 20.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>650 VP</span>
+                                <span class="font-bold text-primary">Rp 100.000</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
+                                <span>1375 VP</span>
+                                <span class="font-bold text-primary">Rp 200.000</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full mt-4 bg-primary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Marketplace -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8 fade-in">
+                <h2 class="text-3xl font-bold">Pasar <span class="text-primary">Akun Game</span></h2>
+                <div class="flex space-x-4">
+                    <button class="bg-primary text-white px-4 py-2 rounded-full font-medium">Beli Akun</button>
+                    <button class="bg-secondary text-white px-4 py-2 rounded-full font-medium">Jual Akun</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Account 1 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="MLBB Account" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark to-transparent p-4">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Legendary</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Akun MLBB Mythic</h3>
+                            <div class="text-xl font-bold text-primary">Rp 1.250.000</div>
+                        </div>
+                        
+                        <div class="flex items-center text-gray-600 text-sm mb-4">
+                            <i class="fas fa-gamepad mr-1"></i>
+                            <span>Mobile Legends</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Skin</div>
+                                <div class="font-bold">120+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Hero</div>
+                                <div class="font-bold">80+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Tier</div>
+                                <div class="font-bold">Mythic</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Win Rate</div>
+                                <div class="font-bold">78%</div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-secondary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Akun
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Account 2 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.6s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="FF Account" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark to-transparent p-4">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Heroic</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Akun FF Heroic</h3>
+                            <div class="text-xl font-bold text-primary">Rp 2.500.000</div>
+                        </div>
+                        
+                        <div class="flex items-center text-gray-600 text-sm mb-4">
+                            <i class="fas fa-gamepad mr-1"></i>
+                            <span>Free Fire</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Skin</div>
+                                <div class="font-bold">50+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Character</div>
+                                <div class="font-bold">25+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Tier</div>
+                                <div class="font-bold">Heroic</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">K/D Ratio</div>
+                                <div class="font-bold">4.5</div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-secondary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Akun
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Account 3 -->
+                <div class="bg-light rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all product-card fade-in" style="animation-delay: 0.9s;">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1586810724476-c294fb7ac01b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                             alt="PUBG Account" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark to-transparent p-4">
+                            <span class="bg-primary text-white text-xs px-2 py-1 rounded">Conqueror</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Akun PUBG Conqueror</h3>
+                            <div class="text-xl font-bold text-primary">Rp 3.750.000</div>
+                        </div>
+                        
+                        <div class="flex items-center text-gray-600 text-sm mb-4">
+                            <i class="fas fa-gamepad mr-1"></i>
+                            <span>PUBG Mobile</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Skin</div>
+                                <div class="font-bold">80+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Gun Skin</div>
+                                <div class="font-bold">45+</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">Tier</div>
+                                <div class="font-bold">Conqueror</div>
+                            </div>
+                            <div class="bg-white p-2 rounded-lg shadow-sm">
+                                <div class="text-xs text-gray-500">K/D Ratio</div>
+                                <div class="font-bold">6.2</div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-secondary hover:bg-opacity-90 text-white py-2 rounded-lg font-medium transition-all">
+                            Beli Akun
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg z-40">
+        <div class="flex justify-around py-3">
+            <a href="#" class="flex flex-col items-center text-primary">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1">Beranda</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
+                <i class="fas fa-coins text-xl"></i>
+                <span class="text-xs mt-1">Top Up</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
+                <i class="fas fa-shopping-bag text-xl"></i>
+                <span class="text-xs mt-1">Beli Akun</span>
+            </a>
+            <a href="#" class="flex flex-col items-center text-gray-500 hover:text-primary transition-colors">
+                <i class="fas fa-wallet text-xl"></i>
+                <span class="text-xs mt-1">Jual Akun</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="main.js"></script>
+</body>
+</html>
